@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101426">
+  <meta name="description" content="SmartDesk - Your Personal Smart Assistant">
+
+  <title>SmartDesk 2.0</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+
+      <div>
+        <h2>SmartDesk</h2>
+        <small>Personal Assistant</small>
+      </div>
+    </div>
+
+    <button class="theme-btn" id="themeBtn" type="button">
+      ☀
+    </button>
+
+  </header>
+
+  <main>
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="homePage">
+
+      <div class="welcome">
+        <p class="eyebrow">YOUR SMART WORKSPACE</p>
+        <h1>Hello! 👋</h1>
+        <p>Welcome to your personal workspace.</p>
+      </div>
+
+      <div class="hero-card">
+
+        <div class="online">
+          <span></span> SMARTDESK IS READY
+        </div>
+
+        <h2>Your day.<br>Organized.</h2>
+
+        <p>
+          Manage your ideas, tasks and daily work in one place.
+        </p>
+
+        <button class="hero-btn" data-page="chatPage" type="button">
+          Explore Assistant →
+        </button>
+
+      </div>
+
+      <div class="section-heading">
+        <h3>Quick Access</h3>
+        <span>YOUR TOOLS</span>
+      </div>
+
+      <div class="quick-grid">
+
+        <button class="quick-card" data-page="chatPage" type="button">
+          <span>🤖</span>
+          <b>AI Assistant</b>
+          <small>Smart chat</small>
+        </button>
+
+        <button class="quick-card" data-page="notesPage" type="button">
+          <span>📝</span>
+          <b>My Notes</b>
+          <small>Save ideas</small>
+        </button>
+
+        <button class="quick-card" data-page="tasksPage" type="button">
+          <span>☑️</span>
+          <b>My Tasks</b>
+          <small>Stay productive</small>
+        </button>
+
+        <button class="quick-card" data-page="settingsPage" type="button">
+          <span>⚙️</span>
+          <b>Settings</b>
+          <small>Customize app</small>
+        </button>
+
+      </div>
+
+      <div class="section-heading">
+        <h3>Overview</h3>
+        <span>YOUR ACTIVITY</span>
+      </div>
+
+      <div class="overview">
+
+        <div>
+          <span>📝</span>
+          <strong id="noteCount">0</strong>
+          <small>Total Notes</small>
+        </div>
+
+        <div>
+          <span>☑️</span>
+          <strong id="taskCount">0</strong>
+          <small>Total Tasks</small>
+        </div>
+
+      </div>
+
+      <div class="date-card">
+
+        <span>📅</span>
+
+        <div>
+          <b id="todayDate">Today</b>
+          <small>Your daily workspace</small>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ASSISTANT PAGE -->
+    <section class="page" id="chatPage">
+
+      <div class="page-heading">
+        <p class="eyebrow">SMART TECHNOLOGY</p>
+        <h1>Assistant 🤖</h1>
+        <p>Your personal voice assistant.</p>
+      </div>
+
+      <!-- CHAT AREA -->
+      <div class="chat-box" id="chatBox">
+
+        <div class="message bot">
+          Hello! I'm SmartDesk. 👋
+          <br>
+          You can type or speak to me.
+        </div>
+
+      </div>
+
+      <!-- VOICE ASSISTANT -->
+      <div class="voice-panel">
+
+        <button
+          type="button"
+          id="micBtn"
+          class="mic-btn"
+          aria-label="Start voice assistant">
+
+          🎙️
+
+        </button>
+
+        <div>
+          <b>Voice Assistant</b>
+
+          <small id="voiceStatus">
+            Tap microphone to speak
+          </small>
+        </div>
+
+      </div>
+
+      <!-- VOICE SETTINGS -->
+      <div class="voice-options">
+
+        <label>
+          <input type="checkbox" id="voiceReply" checked>
+          Speak replies
+        </label>
+
+      </div>
+
+      <!-- TEXT CHAT -->
+      <form id="chatForm" class="chat-form">
+
+        <input
+          id="chatInput"
+          type="text"
+          placeholder="Type your message..."
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit" aria-label="Send message">
+          ➤
+        </button>
+
+      </form>
+
+      <p class="hint">
+        Voice features require browser microphone permission.
+      </p>
+
+    </section>
+
+    <!-- NOTES PAGE -->
+    <section class="page" id="notesPage">
+
+      <div class="page-heading">
+        <p class="eyebrow">PERSONAL SPACE</p>
+        <h1>My Notes 📝</h1>
+        <p>Save your thoughts and important ideas.</p>
+      </div>
+
+      <textarea
+        id="noteInput"
+        placeholder="Write something here...">
+      </textarea>
+
+      <button class="primary-btn" id="saveNote" type="button">
+        ＋ Save Note
+      </button>
+
+      <div class="section-heading">
+        <h3>Saved Notes</h3>
+      </div>
+
+      <div id="notesList" class="saved-list"></div>
+
+    </section>
+
+    <!-- TASKS PAGE -->
+    <section class="page" id="tasksPage">
+
+      <div class="page-heading">
+        <p class="eyebrow">STAY PRODUCTIVE</p>
+        <h1>My Tasks ☑️</h1>
+        <p>Organize your daily activities.</p>
+      </div>
+
+      <form id="taskForm" class="task-form">
+
+        <input
+          id="taskInput"
+          type="text"
+          placeholder="Enter a new task..."
+          required
+        >
+
+        <button type="submit">
+          Add
+        </button>
+
+      </form>
+
+      <div class="section-heading">
+        <h3>My To-do List</h3>
+      </div>
+
+      <div id="tasksList" class="saved-list"></div>
+
+    </section>
+
+    <!-- SETTINGS PAGE -->
+    <section class="page" id="settingsPage">
+
+      <div class="page-heading">
+        <p class="eyebrow">PERSONALIZATION</p>
+        <h1>Settings ⚙️</h1>
+        <p>Manage your SmartDesk application.</p>
+      </div>
+
+      <div class="setting-card">
+
+        <div>
+          <b>Appearance</b>
+          <small>Dark and light mode</small>
+        </div>
+
+        <button id="settingsTheme" type="button">
+          Change
+        </button>
+
+      </div>
+
+      <div class="setting-card">
+
+        <div>
+          <b>Install SmartDesk</b>
+          <small>Add to your home screen</small>
+        </div>
+
+        <button id="installBtn" type="button">
+          Install
+        </button>
+
+      </div>
+
+      <div class="setting-card">
+
+        <div>
+          <b>Application</b>
+          <small>SmartDesk PWA</small>
+        </div>
+
+        <span>v2.0</span>
+
+      </div>
+
+      <div class="setting-card">
+
+        <div>
+          <b>Storage</b>
+          <small>Your notes and tasks are saved locally</small>
+        </div>
+
+        <span>Local</span>
+
+      </div>
+
+      <button class="danger-btn" id="clearData" type="button">
+        Clear All Notes & Tasks
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+
+    <button class="nav-btn active" data-page="homePage" type="button">
+      <span>⌂</span>
+      Home
+    </button>
+
+    <button class="nav-btn" data-page="chatPage" type="button">
+      <span>✧</span>
+      Assistant
+    </button>
+
+    <button class="nav-btn" data-page="notesPage" type="button">
+      <span>▤</span>
+      Notes
+    </button>
+
+    <button class="nav-btn" data-page="tasksPage" type="button">
+      <span>☑</span>
+      Tasks
+    </button>
+
+    <button class="nav-btn" data-page="settingsPage" type="button">
+      <span>⚙</span>
+      Settings
+    </button>
+
+  </nav>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
